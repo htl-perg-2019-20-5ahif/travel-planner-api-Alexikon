@@ -1,13 +1,10 @@
-﻿using System;
+﻿using MC5_U3_TravelPlanner.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using MC5_U3_TravelPlanner.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace MC5_U3_TravelPlanner.Controllers
 {
@@ -20,7 +17,7 @@ namespace MC5_U3_TravelPlanner.Controllers
         private readonly ILogger<TravelPlannerController> _logger;
 
         public TravelPlannerController(IHttpClientFactory clientFactory, ITravelCalculator calculator, ILogger<TravelPlannerController> logger)
-        { 
+        {
             _clientFactory = clientFactory;
             _calculator = calculator;
             _logger = logger;
@@ -36,7 +33,7 @@ namespace MC5_U3_TravelPlanner.Controllers
 
             Departure departure = _calculator.calculateTravel(from, to, start, travels);
 
-            if(departure == null)
+            if (departure == null)
             {
                 return NotFound();
             }
